@@ -70,9 +70,11 @@ a:hover{text-decoration:underline}
 .grid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:16px;align-items:start}
 @media (max-width:900px){.grid{grid-template-columns:1fr}.nav ul{display:none}.cover{height:140px}}
 @media (max-width:600px){
-  .wrap{padding:12px}
-  .pbody{padding:0 16px 20px}
-  .prow>div:first-child{flex:1 1 100%;min-width:0}
+  .wrap{width:100%;padding:20px}
+  .profile{width:100%;min-width:0}
+  .pbody{padding:0 24px 24px;min-width:0}
+  .prow,.prow>div:first-child{width:100%;min-width:0}
+  .prow>div:first-child{flex:1 1 100%}
   .prow h1{font-size:clamp(21px,7vw,26px);overflow-wrap:anywhere}
   .headline{max-width:100%;overflow-wrap:anywhere}
   .btns{width:100%}
