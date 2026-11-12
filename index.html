@@ -373,7 +373,7 @@ function placeholderHeat() {
     $("#langs").innerHTML = "";
   }
   try {
-    const res = await fetch(`https://github-contributions-api.jogruber.de/v4/${C.username}?y=last`);
+    const res = await fetch(`contributions.json`);
     if (!res.ok) throw new Error("contrib");
     renderHeat(await res.json());
   } catch (e) { placeholderHeat(); }
