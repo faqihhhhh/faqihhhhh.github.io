@@ -378,6 +378,18 @@ function placeholderHeat() {
     if (!res.ok) throw new Error("contrib");
     renderHeat(await res.json());
   } catch (e) { placeholderHeat(); }
+  /* bahasa dari languages.json (termasuk repo private) */
+  try {
+    const res = await fetch("languages.json");
+    if (!res.ok) throw new Error("lang");
+    const d = await res.json();
+    const total = d.languages.reduce((n, l) => n + l.bytes, 0);
+    const top = d.languages.slice(0, 5);
+    if (total) $("#langs").innerHTML =
+      `<div class="bar">${top.map(l => `<div style="width:${l.bytes / total * 100}%;background:${COLORS[l.language] || "#8b949e"}"></div>`).join("")}</div>` +
+      top.map(l => `<div class="lang"><span>${dot(l.language)}${esc(l.language)}</span><span>${Math.round(l.bytes / total * 100)}%</span></div>`).join("") +
+      `<p class="note">Berdasarkan ukuran kode di ${d.repos} repo, termasuk yang private.</p>`;
+  } catch (e) {}
 })();
 </script>
 </body>
