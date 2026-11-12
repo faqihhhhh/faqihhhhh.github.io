@@ -1,0 +1,40 @@
+name: Update languages
+on:
+  schedule:
+    - cron: "30 */12 * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+  pages: write
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch languages
+        env:
+          GH_TOKEN: ${{ secrets.LANG_TOKEN }}
+        run: |
+          gh api --paginate "user/repos?affiliation=owner&per_page=100" \
+            --jq '.[] | select(.fork == false) | .full_name' > repos.txt
+          : > all.jsonl
+          while read -r repo; do
+            gh api "repos/$repo/languages" >> all.jsonl
+          done < repos.txt
+          jq -s '{
+            repos: length,
+            languages: (map(to_entries) | add // [] | group_by(.key)
+              | map({language: .[0].key, bytes: (map(.value) | add)})
+              | sort_by(-.bytes))
+          }' all.jsonl > languages.json
+          rm repos.txt all.jsonl
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add languages.json
+          git diff --cached --quiet || (git commit -m "Update languages" && git pull --rebase && git push)
+      - name: Trigger Pages build
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST repos/${{ github.repository }}/pages/builds
