@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Faqih | Portofolio</title>
+<meta name="description" content="Portofolio Faqih: proyek, pengalaman, dan aktivitas GitHub.">
+<meta property="og:title" content="Faqih | Portofolio">
+<meta property="og:description" content="Proyek, pengalaman, dan aktivitas GitHub.">
+<meta name="theme-color" content="#0d1117">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%91%E2%80%8D%F0%9F%92%BB%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0d1117; --surface:#161b22; --border:#30363d;
+  --text:#e6edf3; --muted:#8b949e; --accent:#2f81f7; --green:#3fb950;
+  --sans:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{background:var(--bg);color:var(--text);font:400 15px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+
+/* navbar */
+.nav{position:sticky;top:0;z-index:10;background:rgba(13,17,23,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav .in{max-width:1128px;margin:0 auto;padding:0 20px;height:56px;display:flex;align-items:center;justify-content:space-between}
+.nav .brand{font:500 15px var(--mono);color:var(--text)}
+.nav ul{display:flex;gap:4px;list-style:none;padding:0}
+.nav ul a{display:block;padding:6px 12px;color:var(--muted);border-radius:6px;font-size:14px}
+.nav ul a:hover{color:var(--text);background:var(--surface);text-decoration:none}
+
+.wrap{max-width:1128px;margin:0 auto;padding:20px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:24px;margin-bottom:16px}
+.card h2{font-size:20px;font-weight:600;margin-bottom:16px}
+.card h3{font-size:15px;font-weight:600;margin-bottom:12px}
+
+/* header profil */
+.profile{padding:0;overflow:hidden}
+.cover{height:200px;background:
+  linear-gradient(135deg,#0d1117 0%,#161b22 50%,#0d1117 100%);
+  border-bottom:1px solid var(--border);position:relative}
+.cover::after{content:"";position:absolute;inset:0;
+  background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);
+  background-size:40px 40px;opacity:.35;
+  mask-image:linear-gradient(to bottom,transparent,#000 40%,transparent)}
+.pbody{padding:0 24px 24px;position:relative}
+.avatar{width:136px;height:136px;border-radius:50%;border:4px solid var(--surface);background:var(--bg);margin-top:-68px;object-fit:cover;position:relative;z-index:1;display:block}
+.prow{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:12px}
+.prow h1{font-size:26px;font-weight:700;line-height:1.25}
+.handle{font:400 14px var(--mono);color:var(--muted)}
+.headline{margin-top:6px;max-width:60ch}
+.meta{margin-top:8px;color:var(--muted);font-size:14px;display:flex;flex-wrap:wrap;gap:6px 18px}
+.open{display:inline-flex;align-items:center;gap:6px;color:var(--green)}
+.open::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--green)}
+.btns{display:flex;gap:8px;flex-wrap:wrap;align-self:flex-start}
+.btn{display:inline-block;padding:7px 16px;border-radius:999px;font-weight:600;font-size:14px;border:1px solid var(--accent);color:var(--accent);background:transparent;transition:background .15s}
+.btn:hover{background:rgba(47,129,247,.12);text-decoration:none}
+.btn.fill{background:var(--accent);color:#fff}
+.btn.fill:hover{background:#4c93ff}
+.btn.ghost{border-color:var(--border);color:var(--text)}
+.btn.ghost:hover{background:var(--bg)}
+
+/* grid utama */
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:16px;align-items:start}
+@media (max-width:900px){.grid{grid-template-columns:1fr}.nav ul{display:none}.cover{height:140px}}
+
+/* proyek */
+.projects{display:grid;gap:12px}
+.proj{background:var(--bg);border:1px solid var(--border);border-radius:8px}
+.proj[open]{border-color:#484f58}
+.proj summary{list-style:none;cursor:pointer;padding:16px 18px;display:block}
+.proj summary::-webkit-details-marker{display:none}
+.proj summary:hover .pn{text-decoration:underline}
+.ph{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.pn{font:500 15px var(--mono);word-break:break-word}
+.badge{font-size:12px;padding:1px 8px;border:1px solid var(--border);border-radius:999px;color:var(--muted)}
+.badge.priv{color:#d29922;border-color:rgba(210,153,34,.45)}
+.badge.pub{color:var(--green);border-color:rgba(63,185,80,.45)}
+.gh{margin-left:auto;font-size:12px;color:var(--muted)}
+.ps{display:block;color:var(--muted);font-size:14px;margin:6px 0 10px}
+.tog{display:block;margin-top:12px;font-size:13px;color:var(--accent)}
+.tog::before{content:"Lihat penjelasan"}
+.proj[open] .tog::before{content:"Tutup penjelasan"}
+.pd{display:grid;grid-template-columns:1fr 1fr;gap:18px 28px;padding:16px 18px 18px;border-top:1px solid var(--border)}
+.pd h4{font-size:14px;font-weight:600;margin-bottom:4px}
+.pd p{color:var(--muted);font-size:14px}
+.pd .fail{border-left:2px solid #f85149;padding-left:12px}
+.pd .links{grid-column:1/-1;display:flex;gap:16px;font-size:14px}
+@media (max-width:700px){.pd{grid-template-columns:1fr}}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px}
+
+/* timeline */
+.tl{list-style:none;padding:0}
+.tl li{position:relative;padding:0 0 22px 22px;border-left:2px solid var(--border);margin-left:6px}
+.tl li:last-child{padding-bottom:0;border-color:transparent}
+.tl li::before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--accent)}
+.tl .t{font-weight:600}
+.tl .o{color:var(--text)}
+.tl .d{font:400 12px var(--mono);color:var(--muted);margin:2px 0 6px}
+.tl p{color:var(--muted);font-size:14px}
+
+/* sidebar */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}
+.stats b{display:block;font-size:22px;font-weight:700}
+.stats span{font-size:12px;color:var(--muted)}
+.bar{display:flex;height:8px;border-radius:4px;overflow:hidden;margin-bottom:12px;background:var(--bg)}
+.lang{display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px}
+.lang span:last-child{color:var(--muted);font-family:var(--mono);font-size:12px}
+.heat{overflow-x:auto;padding-bottom:6px}
+.cells{display:grid;grid-auto-flow:column;grid-template-rows:repeat(7,10px);gap:3px;width:max-content}
+.cells i{width:10px;height:10px;border-radius:2px;background:#161b22;outline:1px solid rgba(240,246,252,.06);outline-offset:-1px}
+.cells .l1{background:#0e4429}.cells .l2{background:#006d32}.cells .l3{background:#26a641}.cells .l4{background:#39d353}
+.heat-total{font-size:13px;color:var(--muted);margin-bottom:10px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:400 12px var(--mono);padding:3px 10px;border:1px solid var(--border);border-radius:999px;background:var(--bg)}
+.contact{list-style:none;padding:0;display:grid;gap:8px;font-size:14px}
+.contact span{color:var(--muted);display:inline-block;min-width:76px}
+.note{font-size:12px;color:var(--muted);margin-top:10px}
+footer{text-align:center;color:var(--muted);font-size:13px;padding:24px 20px 40px}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Navigasi utama">
+  <div class="in">
+    <a class="brand" href="#top">faqihhhhh</a>
+    <ul>
+      <li><a href="#tentang">Tentang</a></li>
+      <li><a href="#proyek">Proyek</a></li>
+      <li><a href="#pengalaman">Pengalaman</a></li>
+      <li><a href="#pendidikan">Pendidikan</a></li>
+      <li><a href="#kontak">Kontak</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="wrap" id="top">
+
+  <header class="card profile">
+    <div class="cover" role="presentation"></div>
+    <div class="pbody">
+      <img class="avatar" id="avatar" alt="Foto profil" width="136" height="136">
+      <div class="prow">
+        <div>
+          <h1 id="name"></h1>
+          <div class="handle" id="handle"></div>
+          <p class="headline" id="headline"></p>
+          <div class="meta" id="meta"></div>
+        </div>
+        <div class="btns" id="btns"></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="grid">
+    <div>
+      <section class="card" id="tentang"><h2>Tentang</h2><p id="about"></p></section>
+
+      <section class="card" id="proyek">
+        <h2>Proyek unggulan</h2>
+        <div class="projects" id="projects"></div>
+        <p class="note" id="projNote"></p>
+      </section>
+
+      <section class="card" id="pengalaman"><h2>Pengalaman</h2><ul class="tl" id="exp"></ul></section>
+      <section class="card" id="pendidikan"><h2>Pendidikan</h2><ul class="tl" id="edu"></ul></section>
+    </div>
+
+    <aside>
+      <section class="card">
+        <h3>Statistik GitHub</h3>
+        <div class="stats" id="stats"></div>
+      </section>
+      <section class="card">
+        <h3>Bahasa teratas</h3>
+        <div id="langs"><p class="note">Memuat data...</p></div>
+      </section>
+      <section class="card">
+        <h3>Kontribusi</h3>
+        <div class="heat-total" id="heatTotal"></div>
+        <div class="heat"><div class="cells" id="cells" aria-label="Grafik kontribusi GitHub setahun terakhir"></div></div>
+      </section>
+      <section class="card">
+        <h3>Keahlian</h3>
+        <div class="chips" id="skills"></div>
+      </section>
+      <section class="card" id="kontak">
+        <h3>Kontak</h3>
+        <ul class="contact" id="contact"></ul>
+      </section>
+    </aside>
+  </div>
+</main>
+
+<footer>Dibuat dengan HTML, CSS, dan GitHub API.</footer>
+
+<script>
+/* ============================================================
+   EDIT BAGIAN INI SAJA. Semua teks bertanda [placeholder]
+   adalah contoh yang perlu Anda ganti.
+   ============================================================ */
+const C = {
+  username: "faqihhhhh",
+  name: "Faqih [Nama Lengkap]",
+  headline: "[Role, misal: Web Developer] yang fokus pada [bidang, misal: aplikasi web yang cepat dan mudah dipakai].",
+  location: "Jakarta, Indonesia",
+  openToWork: true,
+  cv: "",                       // isi "CV.pdf" jika file sudah ditaruh di repo
+  about: "[Placeholder] Halo, saya Faqih. Tulis 3 sampai 4 kalimat tentang diri Anda: apa yang Anda kerjakan, teknologi yang Anda sukai, dan jenis proyek yang ingin Anda garap. Lalu tambahkan satu kalimat tentang hal yang sedang Anda pelajari.",
+  experience: [
+    { title: "[Posisi]", org: "[Nama Perusahaan atau Organisasi]", period: "Jan 2025 - Sekarang", desc: "[Placeholder] Jelaskan tanggung jawab dan hasil nyata, misalnya: membangun fitur X yang mempercepat proses Y sebesar Z%." },
+    { title: "[Posisi Sebelumnya]", org: "[Nama Perusahaan]", period: "Jun 2023 - Des 2024", desc: "[Placeholder] Ringkas peran, teknologi yang dipakai, dan pencapaian utama." }
+  ],
+  education: [
+    { title: "[Jurusan / Program Studi]", org: "[Nama Universitas atau Sekolah]", period: "2020 - 2024", desc: "[Placeholder] IPK, organisasi, atau tugas akhir yang relevan." }
+  ],
+  skills: ["JavaScript","HTML","CSS","Git","[Skill 5]","[Skill 6]"],
+  contact: [
+    { label: "Email", value: "email@contoh.com", href: "mailto:email@contoh.com" },
+    { label: "LinkedIn", value: "linkedin.com/in/[username]", href: "https://linkedin.com/in/" },
+    { label: "GitHub", value: "github.com/faqihhhhh", href: "https://github.com/faqihhhhh" }
+  ],
+  /* PROYEK: semua penjelasan ditulis di sini, jadi proyek private tetap bisa dipamerkan.
+     visibility: "public" atau "private"
+     repo: nama repo (hanya untuk public). Bahasa dan star diambil otomatis dari GitHub.
+     demo: tautan demo (opsional). status: misal "Selesai", "Berjalan", "Dihentikan". */
+  projects: [
+    {
+      name: "proyek-contoh-1", visibility: "public", repo: "proyek-contoh-1", demo: "", status: "Selesai",
+      summary: "[Placeholder] Satu kalimat tentang apa proyek ini.",
+      stack: ["JavaScript", "HTML", "CSS"],
+      purpose: "[Placeholder] Apa fungsi proyek ini dan siapa yang memakainya, dalam bahasa yang dimengerti orang non-teknis.",
+      problem: "[Placeholder] Masalah nyata apa yang terjadi sebelum proyek ini ada, dan bagaimana proyek ini menyelesaikannya.",
+      commercial: "[Placeholder] Siapa yang mau membayar, berapa kira-kira, dan lewat model apa (langganan, lisensi, iklan, jasa).",
+      failure: "[Placeholder] Alasan jujur proyek ini bisa gagal sebagai produk: pasar terlalu kecil, sudah ada pesaing kuat, biaya operasional, atau sulit mendapat pengguna."
+    },
+    {
+      name: "proyek-private-1", visibility: "private", repo: "", demo: "", status: "Berjalan",
+      summary: "[Placeholder] Proyek private. Kodenya tidak dibuka, tetapi penjelasannya lengkap di sini.",
+      stack: ["Python", "PostgreSQL"],
+      purpose: "[Placeholder] Fungsi utama proyek.",
+      problem: "[Placeholder] Masalah yang diselesaikan dan dampaknya.",
+      commercial: "[Placeholder] Peluang bisnis jika dijual atau dijadikan layanan.",
+      failure: "[Placeholder] Risiko dan alasan kegagalan yang paling mungkin."
+    },
+    {
+      name: "proyek-private-2", visibility: "private", repo: "", demo: "", status: "Dihentikan",
+      summary: "[Placeholder] Proyek yang dihentikan juga layak ditampilkan beserta pelajarannya.",
+      stack: ["[Teknologi]"],
+      purpose: "[Placeholder] Fungsi utama proyek.",
+      problem: "[Placeholder] Masalah yang diselesaikan.",
+      commercial: "[Placeholder] Gambaran model bisnisnya.",
+      failure: "[Placeholder] Mengapa berhenti atau gagal, dan apa yang dipelajari darinya."
+    }
+  ]
+};
+/* ============================================================ */
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const COLORS = {JavaScript:"#f1e05a",TypeScript:"#3178c6",Python:"#3572A5",HTML:"#e34c26",CSS:"#563d7c",Java:"#b07219",PHP:"#4F5D95",Go:"#00ADD8",Rust:"#dea584",Dart:"#00B4AB",Kotlin:"#A97BFF","C++":"#f34b7d",C:"#555555","C#":"#178600",Shell:"#89e051",Vue:"#41b883"};
+const dot = l => `<span class="dot" style="background:${COLORS[l]||"#8b949e"}"></span>`;
+
+/* --- konten statis --- */
+document.title = C.name + " | Portofolio";
+$("#name").textContent = C.name;
+$("#handle").textContent = "@" + C.username;
+$("#headline").textContent = C.headline;
+$("#about").textContent = C.about;
+$("#avatar").src = `https://github.com/${C.username}.png?size=272`;
+$("#meta").innerHTML =
+  `<span>${esc(C.location)}</span>` + (C.openToWork ? `<span class="open">Terbuka untuk peluang</span>` : "");
+$("#btns").innerHTML =
+  `<a class="btn fill" href="https://github.com/${C.username}" target="_blank" rel="noopener">Ikuti di GitHub</a>` +
+  `<a class="btn" href="#kontak">Hubungi</a>` +
+  (C.cv ? `<a class="btn ghost" href="${esc(C.cv)}" download>Unduh CV</a>` : "");
+
+const timeline = list => list.map(i =>
+  `<li><div class="t">${esc(i.title)}</div><div class="o">${esc(i.org)}</div><div class="d">${esc(i.period)}</div><p>${esc(i.desc)}</p></li>`).join("");
+$("#exp").innerHTML = timeline(C.experience);
+$("#edu").innerHTML = timeline(C.education);
+$("#skills").innerHTML = C.skills.map(s => `<span class="chip">${esc(s)}</span>`).join("");
+$("#contact").innerHTML = C.contact.map(c =>
+  `<li><span>${esc(c.label)}</span><a href="${esc(c.href)}" target="_blank" rel="noopener">${esc(c.value)}</a></li>`).join("");
+
+/* --- proyek --- */
+function renderProjects() {
+  const a = (href, label) => `<a href="${esc(href)}" target="_blank" rel="noopener">${label}</a>`;
+  $("#projects").innerHTML = C.projects.map((p, i) => {
+    const pub = p.visibility === "public";
+    const repoUrl = pub && p.repo ? `https://github.com/${C.username}/${p.repo}` : "";
+    const links = (repoUrl ? a(repoUrl, "Lihat repo di GitHub") : "") + (p.demo ? a(p.demo, "Buka demo") : "");
+    return `<details class="proj"${i === 0 ? " open" : ""}${pub && p.repo ? ` data-repo="${esc(p.repo)}"` : ""}>
+      <summary>
+        <span class="ph">
+          <span class="pn">${esc(p.name)}</span>
+          <span class="badge ${pub ? "pub" : "priv"}">${pub ? "Publik" : "Private"}</span>
+          ${p.status ? `<span class="badge">${esc(p.status)}</span>` : ""}
+          <span class="gh"></span>
+        </span>
+        <span class="ps">${esc(p.summary)}</span>
+        <span class="chips">${(p.stack || []).map(s => `<span class="chip">${esc(s)}</span>`).join("")}</span>
+        <span class="tog"></span>
+      </summary>
+      <div class="pd">
+        <div><h4>Gunanya apa</h4><p>${esc(p.purpose)}</p></div>
+        <div><h4>Masalah yang diselesaikan</h4><p>${esc(p.problem)}</p></div>
+        <div><h4>Jika dikomersialkan</h4><p>${esc(p.commercial)}</p></div>
+        <div class="fail"><h4>Kenapa bisa gagal</h4><p>${esc(p.failure)}</p></div>
+        ${links ? `<div class="links">${links}</div>` : ""}
+      </div>
+    </details>`;
+  }).join("");
+  $("#projNote").textContent = C.projects.some(p => p.visibility !== "public")
+    ? "Proyek bertanda Private tidak punya tautan repo, jadi seluruh penjelasannya ditulis di halaman ini." : "";
+}
+
+/* --- statistik GitHub --- */
+function renderStats(user, repos) {
+  const stars = repos.reduce((n, r) => n + r.stargazers_count, 0);
+  $("#stats").innerHTML = [[user.public_repos, "Repo"], [stars, "Star"], [user.followers, "Pengikut"]]
+    .map(([v, l]) => `<div><b>${v}</b><span>${l}</span></div>`).join("");
+
+  const count = {};
+  repos.forEach(r => r.language && (count[r.language] = (count[r.language] || 0) + 1));
+  const total = Object.values(count).reduce((a, b) => a + b, 0);
+  const top = Object.entries(count).sort((a, b) => b[1] - a[1]).slice(0, 5);
+  $("#langs").innerHTML = total
+    ? `<div class="bar">${top.map(([l, n]) => `<div style="width:${n / total * 100}%;background:${COLORS[l] || "#8b949e"}"></div>`).join("")}</div>` +
+      top.map(([l, n]) => `<div class="lang"><span>${dot(l)}${esc(l)}</span><span>${Math.round(n / total * 100)}%</span></div>`).join("")
+    : `<p class="note">Belum ada data bahasa.</p>`;
+}
+
+/* --- heatmap kontribusi --- */
+function renderHeat(data) {
+  const days = data.contributions || [];
+  const first = new Date(days[0].date).getUTCDay();
+  const pad = '<i style="visibility:hidden"></i>'.repeat(first);
+  $("#cells").innerHTML = pad + days.map(d => `<i class="l${d.level}" title="${d.count} kontribusi pada ${d.date}"></i>`).join("");
+  const sum = days.reduce((n, d) => n + d.count, 0);
+  $("#heatTotal").textContent = `${sum} kontribusi dalam setahun terakhir`;
+}
+function placeholderHeat() {
+  $("#cells").innerHTML = '<i></i>'.repeat(371);
+  $("#heatTotal").textContent = "Data kontribusi belum dapat dimuat.";
+}
+
+/* --- ambil data GitHub --- */
+(async () => {
+  renderProjects();
+  try {
+    const [uRes, rRes] = await Promise.all([
+      fetch(`https://api.github.com/users/${C.username}`),
+      fetch(`https://api.github.com/users/${C.username}/repos?per_page=100&sort=updated`)
+    ]);
+    if (!uRes.ok || !rRes.ok) throw new Error("GitHub API");
+    const user = await uRes.json();
+    const repos = (await rRes.json()).filter(r => !r.fork);
+    if (user.name && C.name.includes("[")) { $("#name").textContent = user.name; }
+    renderStats(user, repos);
+    document.querySelectorAll("[data-repo]").forEach(el => {
+      const r = repos.find(x => x.name === el.dataset.repo);
+      if (r) el.querySelector(".gh").innerHTML = (r.language ? dot(r.language) + esc(r.language) + " &nbsp; " : "") + "&#9733; " + r.stargazers_count;
+    });
+  } catch (e) {
+    $("#stats").innerHTML = '<p class="note" style="grid-column:1/-1">Statistik belum dapat dimuat.</p>';
+    $("#langs").innerHTML = "";
+  }
+  try {
+    const res = await fetch(`https://github-contributions-api.jogruber.de/v4/${C.username}?y=last`);
+    if (!res.ok) throw new Error("contrib");
+    renderHeat(await res.json());
+  } catch (e) { placeholderHeat(); }
+})();
+</script>
+</body>
+</html>
