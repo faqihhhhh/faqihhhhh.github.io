@@ -23,7 +23,7 @@ jobs:
           done < repos.txt
           jq -s '{
             repos: length,
-            languages: (map(to_entries) | add // [] | group_by(.key)
+            languages: (map(to_entries) | add // [] | map(select(.key != "Jupyter Notebook")) | group_by(.key)
               | map({language: .[0].key, bytes: (map(.value) | add)})
               | sort_by(-.bytes))
           }' all.jsonl > languages.json
