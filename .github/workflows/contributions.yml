@@ -1,0 +1,43 @@
+name: Update contributions
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+  pages: write
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch contributions
+        env:
+          GH_TOKEN: ${{ secrets.CONTRIB_TOKEN }}
+        run: |
+          gh api graphql -f query='
+            query {
+              user(login: "faqihhhhh") {
+                contributionsCollection {
+                  contributionCalendar {
+                    totalContributions
+                    weeks { contributionDays { date contributionCount contributionLevel } }
+                  }
+                }
+              }
+            }' | jq '{
+              total: .data.user.contributionsCollection.contributionCalendar.totalContributions,
+              contributions: [ .data.user.contributionsCollection.contributionCalendar.weeks[].contributionDays[]
+                | { date, count: .contributionCount,
+                    level: ({"NONE":0,"FIRST_QUARTER":1,"SECOND_QUARTER":2,"THIRD_QUARTER":3,"FOURTH_QUARTER":4}[.contributionLevel]) } ]
+            }' > contributions.json
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add contributions.json
+          git diff --cached --quiet || (git commit -m "Update contributions" && git push)
+      - name: Trigger Pages build
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST repos/${{ github.repository }}/pages/builds
