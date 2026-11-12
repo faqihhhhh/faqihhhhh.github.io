@@ -1,0 +1,85 @@
+{
+  "repos": 9,
+  "languages": [
+    {
+      "language": "Jupyter Notebook",
+      "bytes": 1214047
+    },
+    {
+      "language": "C#",
+      "bytes": 1073785
+    },
+    {
+      "language": "TypeScript",
+      "bytes": 1042872
+    },
+    {
+      "language": "Python",
+      "bytes": 663662
+    },
+    {
+      "language": "HTML",
+      "bytes": 532481
+    },
+    {
+      "language": "Go",
+      "bytes": 483827
+    },
+    {
+      "language": "Blade",
+      "bytes": 418150
+    },
+    {
+      "language": "JavaScript",
+      "bytes": 326347
+    },
+    {
+      "language": "PHP",
+      "bytes": 183296
+    },
+    {
+      "language": "CSS",
+      "bytes": 76365
+    },
+    {
+      "language": "Shell",
+      "bytes": 58220
+    },
+    {
+      "language": "TSQL",
+      "bytes": 54361
+    },
+    {
+      "language": "Astro",
+      "bytes": 43817
+    },
+    {
+      "language": "SCSS",
+      "bytes": 37017
+    },
+    {
+      "language": "PLpgSQL",
+      "bytes": 20637
+    },
+    {
+      "language": "Dockerfile",
+      "bytes": 6252
+    },
+    {
+      "language": "Makefile",
+      "bytes": 3689
+    },
+    {
+      "language": "Mako",
+      "bytes": 704
+    },
+    {
+      "language": "Batchfile",
+      "bytes": 94
+    },
+    {
+      "language": "Procfile",
+      "bytes": 86
+    }
+  ]
+}
