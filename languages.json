@@ -2,10 +2,6 @@
   "repos": 9,
   "languages": [
     {
-      "language": "Jupyter Notebook",
-      "bytes": 1214047
-    },
-    {
       "language": "C#",
       "bytes": 1073785
     },
