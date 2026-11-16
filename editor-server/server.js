@@ -27,6 +27,7 @@ const config = {
 };
 
 app.disable("x-powered-by");
+app.enable("strict routing");
 app.set("trust proxy", 1);
 app.use(express.json({ limit: "1mb" }));
 
