@@ -222,66 +222,7 @@ footer{text-align:center;color:var(--muted);font-size:13px;padding:24px 20px 40p
 <footer>Dibuat dengan HTML, CSS, dan GitHub API.</footer>
 
 <script>
-/* ============================================================
-   EDIT BAGIAN INI SAJA. Semua teks bertanda [placeholder]
-   adalah contoh yang perlu Anda ganti.
-   ============================================================ */
-const C = {
-  username: "faqihhhhh",
-  name: "Faqih [Nama Lengkap]",
-  headline: "[Role, misal: Web Developer] yang fokus pada [bidang, misal: aplikasi web yang cepat dan mudah dipakai].",
-  location: "Jakarta, Indonesia",
-  openToWork: true,
-  cv: "",                       // isi "CV.pdf" jika file sudah ditaruh di repo
-  about: "[Placeholder] Halo, saya Faqih. Tulis 3 sampai 4 kalimat tentang diri Anda: apa yang Anda kerjakan, teknologi yang Anda sukai, dan jenis proyek yang ingin Anda garap. Lalu tambahkan satu kalimat tentang hal yang sedang Anda pelajari.",
-  experience: [
-    { title: "[Posisi]", org: "[Nama Perusahaan atau Organisasi]", period: "Jan 2025 - Sekarang", desc: "[Placeholder] Jelaskan tanggung jawab dan hasil nyata, misalnya: membangun fitur X yang mempercepat proses Y sebesar Z%." },
-    { title: "[Posisi Sebelumnya]", org: "[Nama Perusahaan]", period: "Jun 2023 - Des 2024", desc: "[Placeholder] Ringkas peran, teknologi yang dipakai, dan pencapaian utama." }
-  ],
-  education: [
-    { title: "[Jurusan / Program Studi]", org: "[Nama Universitas atau Sekolah]", period: "2020 - 2024", desc: "[Placeholder] IPK, organisasi, atau tugas akhir yang relevan." }
-  ],
-  skills: ["JavaScript","HTML","CSS","Git","[Skill 5]","[Skill 6]"],
-  contact: [
-    { label: "Email", value: "email@contoh.com", href: "mailto:email@contoh.com" },
-    { label: "LinkedIn", value: "linkedin.com/in/[username]", href: "https://linkedin.com/in/" },
-    { label: "GitHub", value: "github.com/faqihhhhh", href: "https://github.com/faqihhhhh" }
-  ],
-  /* PROYEK: semua penjelasan ditulis di sini, jadi proyek private tetap bisa dipamerkan.
-     visibility: "public" atau "private"
-     repo: nama repo (hanya untuk public). Bahasa dan star diambil otomatis dari GitHub.
-     demo: tautan demo (opsional). status: misal "Selesai", "Berjalan", "Dihentikan". */
-  projects: [
-    {
-      name: "proyek-contoh-1", visibility: "public", repo: "proyek-contoh-1", demo: "", status: "Selesai",
-      summary: "[Placeholder] Satu kalimat tentang apa proyek ini.",
-      stack: ["JavaScript", "HTML", "CSS"],
-      purpose: "[Placeholder] Apa fungsi proyek ini dan siapa yang memakainya, dalam bahasa yang dimengerti orang non-teknis.",
-      problem: "[Placeholder] Masalah nyata apa yang terjadi sebelum proyek ini ada, dan bagaimana proyek ini menyelesaikannya.",
-      commercial: "[Placeholder] Siapa yang mau membayar, berapa kira-kira, dan lewat model apa (langganan, lisensi, iklan, jasa).",
-      failure: "[Placeholder] Alasan jujur proyek ini bisa gagal sebagai produk: pasar terlalu kecil, sudah ada pesaing kuat, biaya operasional, atau sulit mendapat pengguna."
-    },
-    {
-      name: "proyek-private-1", visibility: "private", repo: "", demo: "", status: "Berjalan",
-      summary: "[Placeholder] Proyek private. Kodenya tidak dibuka, tetapi penjelasannya lengkap di sini.",
-      stack: ["Python", "PostgreSQL"],
-      purpose: "[Placeholder] Fungsi utama proyek.",
-      problem: "[Placeholder] Masalah yang diselesaikan dan dampaknya.",
-      commercial: "[Placeholder] Peluang bisnis jika dijual atau dijadikan layanan.",
-      failure: "[Placeholder] Risiko dan alasan kegagalan yang paling mungkin."
-    },
-    {
-      name: "proyek-private-2", visibility: "private", repo: "", demo: "", status: "Dihentikan",
-      summary: "[Placeholder] Proyek yang dihentikan juga layak ditampilkan beserta pelajarannya.",
-      stack: ["[Teknologi]"],
-      purpose: "[Placeholder] Fungsi utama proyek.",
-      problem: "[Placeholder] Masalah yang diselesaikan.",
-      commercial: "[Placeholder] Gambaran model bisnisnya.",
-      failure: "[Placeholder] Mengapa berhenti atau gagal, dan apa yang dipelajari darinya."
-    }
-  ]
-};
-/* ============================================================ */
+let C;
 
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -289,6 +230,7 @@ const COLORS = {JavaScript:"#f1e05a",TypeScript:"#3178c6",Python:"#3572A5",HTML:
 const dot = l => `<span class="dot" style="background:${COLORS[l]||"#8b949e"}"></span>`;
 
 /* --- konten statis --- */
+function renderStaticContent() {
 document.title = C.name + " | Portofolio";
 $("#name").textContent = C.name;
 $("#handle").textContent = "@" + C.username;
@@ -309,6 +251,8 @@ $("#edu").innerHTML = timeline(C.education);
 $("#skills").innerHTML = C.skills.map(s => `<span class="chip">${esc(s)}</span>`).join("");
 $("#contact").innerHTML = C.contact.map(c =>
   `<li><span>${esc(c.label)}</span><a href="${esc(c.href)}" target="_blank" rel="noopener">${esc(c.value)}</a></li>`).join("");
+
+}
 
 /* --- proyek --- */
 function renderProjects() {
@@ -375,6 +319,10 @@ function placeholderHeat() {
 
 /* --- ambil data GitHub --- */
 (async () => {
+  const contentResponse = await fetch("content.json", { cache: "no-store" });
+  if (!contentResponse.ok) throw new Error("content");
+  C = await contentResponse.json();
+  renderStaticContent();
   renderProjects();
   try {
     const [uRes, rRes] = await Promise.all([
