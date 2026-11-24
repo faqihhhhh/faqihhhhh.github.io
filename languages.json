@@ -7,19 +7,19 @@
     },
     {
       "language": "TypeScript",
-      "bytes": 1042872
+      "bytes": 1068004
     },
     {
       "language": "Python",
       "bytes": 663662
     },
     {
-      "language": "HTML",
-      "bytes": 540945
+      "language": "Go",
+      "bytes": 547563
     },
     {
-      "language": "Go",
-      "bytes": 483827
+      "language": "HTML",
+      "bytes": 540945
     },
     {
       "language": "Blade",
@@ -27,7 +27,7 @@
     },
     {
       "language": "JavaScript",
-      "bytes": 338062
+      "bytes": 339570
     },
     {
       "language": "PHP",
@@ -39,7 +39,7 @@
     },
     {
       "language": "Shell",
-      "bytes": 58220
+      "bytes": 59736
     },
     {
       "language": "TSQL",
