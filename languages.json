@@ -2,12 +2,12 @@
   "repos": 9,
   "languages": [
     {
-      "language": "C#",
-      "bytes": 1073785
+      "language": "TypeScript",
+      "bytes": 1081646
     },
     {
-      "language": "TypeScript",
-      "bytes": 1071865
+      "language": "C#",
+      "bytes": 1073785
     },
     {
       "language": "Python",
@@ -15,7 +15,7 @@
     },
     {
       "language": "Go",
-      "bytes": 552332
+      "bytes": 562786
     },
     {
       "language": "HTML",
