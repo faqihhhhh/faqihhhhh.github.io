@@ -3,7 +3,7 @@
   "languages": [
     {
       "language": "TypeScript",
-      "bytes": 1081646
+      "bytes": 1091202
     },
     {
       "language": "C#",
@@ -15,7 +15,7 @@
     },
     {
       "language": "Go",
-      "bytes": 562786
+      "bytes": 578878
     },
     {
       "language": "HTML",
